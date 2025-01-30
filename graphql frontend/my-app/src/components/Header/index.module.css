@@ -1,0 +1,57 @@
+/* index.module.css */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #4CAF50;
+    padding: 10px 20px;
+    color: white;
+    font-family: Arial, sans-serif;
+  }
+  
+  .logo h1 {
+    margin: 0;
+    font-size: 24px;
+  }
+  
+  .nav {
+    flex-grow: 1;
+  }
+  
+  .nav ul {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    justify-content: flex-end;
+    margin: 0;
+  }
+  
+  .navLink {
+    text-decoration: none;
+    color: white;
+    margin: 0 15px;
+    font-size: 18px;
+  }
+  
+  .navLink:hover {
+    text-decoration: underline;
+  }
+  
+  .authButtons {
+    display: flex;
+  }
+  
+  .loginButton, .signupButton {
+    padding: 10px 15px;
+    background-color: #ffffff;
+    color: #4CAF50;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-left: 10px;
+  }
+  
+  .loginButton:hover, .signupButton:hover {
+    background-color: #f1f1f1;
+  }
+  
