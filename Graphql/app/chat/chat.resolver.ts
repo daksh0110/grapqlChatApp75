@@ -1,7 +1,7 @@
-import { PubSub } from 'graphql-subscriptions';
+import { PubSub, PubSubEngine } from 'graphql-subscriptions';
 import Message from './message.schema';
 
-const pubsub = new PubSub();
+const pubsub: PubSubEngine = new PubSub();
 
 export const resolvers2 = {
   Query: {
@@ -22,7 +22,7 @@ export const resolvers2 = {
       await newMessage.save();
 
       // Publish the message to the subscription channel (using receiverId as an identifier)
-      pubsub.publish("MESSAGE_SENT", { messageSent: newMessage, receiverId });
+      pubsub.publish(`MESSAGE_SENT_${receiverId}`, { messageSent: newMessage });
 
       return newMessage;
     },
@@ -31,15 +31,12 @@ export const resolvers2 = {
   Subscription: {
     messageSent: {
       subscribe: (_: any, { receiverId }: { receiverId: string }) => {
-      
-        return pubsub.publish("MESSAGE_SENT", { receiverId })
+        // Listen for the channel specific to the receiverId
+        return pubsub.asyncIterableIterator(`MESSAGE_SENT_${receiverId}`);
       },
-      resolve: (payload: any, args: { receiverId: string }) => {
-        // Filter out messages for the current user based on receiverId
-        if (payload.receiverId === args.receiverId) {
-          return payload.messageSent;
-        }
-        return null;
+      resolve: (payload: any) => {
+        // Just return the message sent when the payload is available
+        return payload.messageSent;
       },
     },
   },

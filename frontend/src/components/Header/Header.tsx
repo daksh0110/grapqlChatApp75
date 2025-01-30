@@ -15,8 +15,8 @@ const Header: React.FC = () => {
         </ul>
       </nav>
       <div className={styles.authButtons}>
-        <button className={styles.loginButton}>Login</button>
-        <button className={styles.signupButton}>Sign Up</button>
+        <button className={styles.loginButton} ><a href="/login" >Login</a></button>
+        <button className={styles.signupButton}><a href="/signup" >Sign Up</a></button>
       </div>
     </header>
   );
